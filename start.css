@@ -1,0 +1,106 @@
+/* Bas */
+body {
+    background-color: #2A0909;
+    font-family: 'Changa', sans-serif;
+    color: white;
+  }
+  
+  /* Header */
+  .site-header {
+    background-color: #651D1F;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .logo img {
+    height: 60px;
+  }
+  
+  .search-form {
+    flex-grow: 1;
+    max-width: 500px;
+    margin: 0 1.5rem;
+  }
+  
+  .search-form .input-group input {
+    background-color: #D9D9D9;
+    border: none;
+    border-radius: 50px 0 0 50px;
+  }
+  
+  .search-form .input-group button {
+    background-color: #D9D9D9;
+    border: none;
+    border-radius: 0 50px 50px 0;
+  }
+  
+  .account-links i.bi-bag {
+    color: white;
+  }
+  
+  /* Navigation */
+  .main-nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    font-weight: 500;
+  }
+  
+  .account-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  /* Innehåll */
+  .main-content {
+    padding: 3rem 1rem;
+    text-align: center;
+  }
+  
+  .page-title {
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Sökfält mitt på sidan */
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+  }
+  
+  .search-main {
+    max-width: 400px;
+    width: 100%;
+    
+  }
+  
+  .search-main input {
+    background-color: #D9D9D9;
+    border: none;
+  }
+  
+  .search-main button {
+    background-color: #D9D9D9;
+    border: none;
+
+  }
+  
+  /* Filmaffischer */
+  .film-poster {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .film-poster:hover {
+    transform: scale(1.03);
+  }
+  

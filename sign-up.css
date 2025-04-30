@@ -1,0 +1,147 @@
+/* Bas */
+body {
+    background-color: #2A0909;
+    font-family: 'Changa', sans-serif;
+    color: white;
+  }
+  
+  /* Header */
+  .site-header {
+    background-color: #651D1F;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  
+  .logo img {
+    height: 60px;
+  }
+  
+  .search-form {
+    flex-grow: 1;
+    max-width: 500px;
+    margin: 0 1.5rem;
+  }
+  
+  .search-form .input-group input {
+    background-color: #D9D9D9;
+    border: none;
+    border-radius: 50px 0 0 50px;
+  }
+  
+  .search-form .input-group button {
+    background-color: #D9D9D9;
+    border: none;
+    border-radius: 0 50px 50px 0;
+  }
+  
+  .account-links i.bi-bag {
+    color: white;
+  }
+
+  .main-nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    font-weight: 500;
+  }
+  
+  .account-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  /* Container och layout */
+  .signup-container {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+  
+  .signup-box {
+    max-width: 90%;
+    width: 100%;
+    height: 700px;
+    border-radius: 2px;
+    overflow: hidden;
+    background-color: #651D1F;
+  }
+  
+  /* Bild */
+  .signup-image {
+    width: 50%;
+    height: 100%;
+  }
+  
+  .signup-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Form */
+  .signup-form-section {
+    width: 50%;
+    background-color: #651D1F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+  
+  .signup-form-inner {
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .form-control {
+    background-color: #D9D9D9;
+    border: none;
+  }
+  
+  /* Knappar */
+  .btn-register {
+    background-color: #2A0909;
+    color: white;
+    border: 2px solid white;
+  }
+  
+  .btn-register:hover {
+    background-color: #421D1D;
+    border-color: #ffffff;
+  }
+  
+  /* Checkbox + avtal */
+  .form-check-label {
+    font-size: 1rem;
+  }
+  
+  .form-check-input {
+    background-color: #D9D9D9;
+    border: none;
+    width: 1.3em;
+    height: 1.3em;
+    margin-top: 0.3rem;
+    appearance: auto; 
+  
+  .form-check-input:checked {
+    background-color: #2A0909;
+    border: none;
+  }
+  
+  
+  
+  .form-text {
+    font-size: 0.875rem;
+  }
+  
+  .text-muted {
+    color: #828282 !important;
+  }
+}
