@@ -1,0 +1,23 @@
+{
+  "name": "kino",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dusknery/Kino.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dusknery/Kino/issues"
+  },
+  "homepage": "https://github.com/Dusknery/Kino#readme",
+  "devDependencies": {
+    "cypress": "^14.3.2"
+  }
+}
