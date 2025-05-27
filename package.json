@@ -2,8 +2,9 @@
   "name": "kino",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "kino/server.js",
   "scripts": {
+    "start": "node kino/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,8 +17,15 @@
   "bugs": {
     "url": "https://github.com/Dusknery/Kino/issues"
   },
-  "homepage": "https://github.com/Dusknery/Kino#readme",
+  "homepage": "https://github.com/Dusknery/Kino/blob/main/public/start.html",
   "devDependencies": {
-    "cypress": "^14.3.2"
+    "cypress": "^14.3.2",
+    "jest": "^29.7.0",
+    "supertest": "^7.1.1"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.3",
+    "node-fetch": "^2.7.0"
   }
 }
