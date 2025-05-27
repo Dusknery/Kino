@@ -48,6 +48,8 @@ app.get('/movies/:id', async (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Servern körs på http://localhost:${PORT}`);
+const server = app.listen(PORT, () => {
+  console.log(`Servern körs på http://localhost:${PORT}`);
 });
+
+module.exports = server;

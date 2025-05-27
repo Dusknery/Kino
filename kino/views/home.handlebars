@@ -1,0 +1,27 @@
+<div class="main-content">
+  <h1 class="page-title">Vad vill du se?</h1>
+
+  <!-- Sökfält -->
+  <div class="search-bar">
+    <div class="input-group search-main">
+      <input type="text" class="form-control" placeholder="Sök" />
+      <button class="btn btn-light" type="submit">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Filmlista -->
+  <div class="container">
+    <div class="row justify-content-center gx-4 gy-4">
+      {{#each movies}}
+        <div class="col-6 col-md-3 mb-4">
+          <a href="/movies/{{this.id}}">
+            <img src="{{this.attributes.image.url}}" alt="{{this.attributes.title}}" class="film-poster">
+          </a>
+          <h5 class="mt-2 text-center">{{this.attributes.title}}</h5>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
