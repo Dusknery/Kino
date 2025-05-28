@@ -114,3 +114,50 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     margin-bottom: 2rem;
   }
+  
+  /* Kortens bakgrund och rundade hörn */
+  .kino-card {
+    background-color: #651D1F;
+    border: none;
+    border-radius: 1rem;
+    color: #fff;
+  }
+  
+  /* Rubriker */
+  .card-title {
+    color: #ffffff !important;
+    font-family: 'Changa', Arial, sans-serif;
+    font-weight: 700;
+  }
+  
+  /* Listor */
+  #upcoming-screenings ul,
+  #popular-movies ul {
+    padding-left: 0;
+  }
+  
+  .list-group-item {
+    background-color: #421D1D;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Changa', Arial, sans-serif;
+  }
+  
+  .list-group-item .badge {
+    background-color: #770F11;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  
+  .text-muted {
+    color: #828282 !important;
+  }
+  
+  #upcoming-screenings p,
+  #popular-movies p {
+    color: #828282;
+    font-style: italic;
+  }

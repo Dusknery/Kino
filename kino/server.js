@@ -73,6 +73,50 @@ app.get('/api/screenings/upcoming', async (req, res) => {
   }
 });
 
+app.get('/api/popular-movies', async (req, res) => {
+  try {
+    // Hämta alla reviews
+    const response = await fetch('https://plankton-app-xhkom.ondigitalocean.app/api/reviews?populate=movie');
+    const data = await response.json();
+    const reviews = data.data;
+
+    // Filtrera reviews till senaste 30 dagar
+    const now = new Date();
+    const thirtyDaysAgo = new Date(now);
+    thirtyDaysAgo.setDate(now.getDate() - 30);
+
+    const recentReviews = reviews.filter(r => {
+      const created = new Date(r.attributes.createdAt);
+      return created >= thirtyDaysAgo && created <= now;
+    });
+
+    // Gruppera reviews per film
+    const movieRatings = {};
+    recentReviews.forEach(r => {
+      const movieId = r.attributes.movie.data.id;
+      const title = r.attributes.movie.data.attributes.title;
+      if (!movieRatings[movieId]) {
+        movieRatings[movieId] = { title, ratings: [] };
+      }
+      movieRatings[movieId].ratings.push(r.attributes.rating);
+    });
+
+    // Räkna ut snittbetyg och sortera
+    const popularMovies = Object.entries(movieRatings)
+      .map(([id, { title, ratings }]) => ({
+        id,
+        title,
+        avgRating: ratings.reduce((a, b) => a + b, 0) / ratings.length
+      }))
+      .sort((a, b) => b.avgRating - a.avgRating)
+      .slice(0, 5);
+
+    res.json(popularMovies);
+  } catch (err) {
+    res.status(500).json({ error: 'Kunde inte hämta populära filmer' });
+  }
+});
+
 const server = app.listen(PORT, () => {
   console.log(`Servern körs på http://localhost:${PORT}`);
 });

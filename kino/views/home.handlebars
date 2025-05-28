@@ -4,25 +4,51 @@
   <!-- Sökfält -->
   <div class="search-bar">
     <div class="input-group search-main">
-      <input type="text" class="form-control" placeholder="Sök" />
+      <input id="movie-search" type="text" class="form-control" placeholder="Sök" />
       <button class="btn btn-light" type="submit">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </div>
 
+  <!-- Kommande visningar och populära filmer -->
+  <div class="container my-4">
+    <div class="row g-4">
+      <div class="col-12 col-lg-6">
+        <div class="card kino-card h-100">
+          <div class="card-body">
+            <h3 class="card-title mb-3 text-primary">
+              <i class="bi bi-calendar-event"></i> Kommande visningar
+            </h3>
+            <div id="upcoming-screenings"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="card kino-card h-100">
+          <div class="card-body">
+            <h3 class="card-title mb-3 text-success">
+              <i class="bi bi-star-fill"></i> Mest populära filmer
+            </h3>
+            <div id="popular-movies"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Filmlista -->
   <div class="container">
+    <h2 class="mt-5 mb-4 text-center" style="color:#fff;">Alla filmer</h2>
     <div class="row justify-content-center gx-4 gy-4">
       {{#each movies}}
-        <div class="col-6 col-md-3 mb-4">
+        <div class="col-6 col-md-3 mb-4 movie-card">
           <a href="/movies/{{this.id}}">
-            <img src="{{this.attributes.image.url}}" alt="{{this.attributes.title}}" class="film-poster">
+            <img src="{{this.attributes.image.url}}" alt="{{this.attributes.title}}" class="film-poster img-fluid rounded shadow-sm">
           </a>
           <h5 class="mt-2 text-center">{{this.attributes.title}}</h5>
         </div>
       {{/each}}
     </div>
   </div>
-  <div id="upcoming-screenings"></div>
 </div>
