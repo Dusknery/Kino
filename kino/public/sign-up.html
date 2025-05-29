@@ -34,7 +34,7 @@
     <div class="account-links">
       <a href="#"><i class="bi bi-bag fs-4"></i></a>
       <div id="userStatus">
-        <a href="log-in.html" class="btn btn-outline-light rounded-pill">
+        <a href="/" class="btn btn-outline-light rounded-pill">
           <i class="bi bi-person me-2"></i> Logga in
         </a>
       </div>
@@ -56,31 +56,28 @@
         <div class="signup-form-inner w-100" style="max-width: 500px;">
           <h2 class="mb-4">Bli medlem</h2>
 
-          <form id="signupForm">
+          <form id="signupForm" action="/register" method="POST">
             <div class="mb-3">
               <label for="username" class="form-label">Användarnamn</label>
-              <input type="text" id="username" class="form-control" required />
+              <input type="text" id="username" class="form-control" name="username" required />
             </div>
 
             <div class="mb-3">
               <label for="fullname" class="form-label">Fullständigt namn</label>
-              <input type="text" id="fullname" class="form-control" required />
+              <input type="text" id="fullname" name="fullname" class="form-control" required />
             </div>
 
             <div class="mb-3">
               <label for="email" class="form-label">E-post</label>
-              <input type="email" id="email" class="form-control" required />
+              <input type="email" id="email" name="email" class="form-control" required />
               <div id="emailFeedback" class="form-text text-danger d-none"></div>
             </div>
 
             <div class="mb-3">
               <label for="password" class="form-label">Lösenord</label>
               <input type="password" id="password" class="form-control" required />
-
-              <div id="passwordStrength" class="form-text text-white">
-                Lösenordsstyrka: <span id="strengthText">-</span>
-              </div>
-              
+              <div id="strengthText" class="form-text"></div>
+            </div>
 
             <!-- Avtal -->
             <div class="form-check mb-4">
@@ -102,6 +99,6 @@
     </div>
   </main>
 
-  <script src="main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

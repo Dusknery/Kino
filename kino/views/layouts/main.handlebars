@@ -32,9 +32,15 @@
     <div class="account-links d-flex align-items-center">
       <a href="#"><i class="bi bi-bag fs-4"></i></a>
       <div id="userStatus">
-        <a href="log-in.html" class="btn btn-outline-light rounded-pill ms-2">
-          <i class="bi bi-person me-2"></i> Logga in
-        </a>
+        {{#if isLoggedIn}}
+          <a href="/profile" class="btn btn-outline-light rounded-pill ms-2">
+            <i class="bi bi-person me-2"></i> {{username}}
+          </a>
+        {{else}}
+          <a href="/log-in.html" class="btn btn-outline-light rounded-pill ms-2">
+            <i class="bi bi-person me-2"></i> Logga in
+          </a>
+        {{/if}}
       </div>
     </div>
   </header>

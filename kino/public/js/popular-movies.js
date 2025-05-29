@@ -6,22 +6,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     const res = await fetch('/api/popular-movies');
     const movies = await res.json();
 
-    if (movies.length === 0) {
-      container.innerHTML = '<p>Inga populära filmer just nu.</p>';
+    if (!movies.length) {
+      container.innerHTML = '<p class="text-muted">Inga populära filmer just nu.</p>';
       return;
     }
 
     container.innerHTML = `
-      <h2>Mest populära filmer (senaste 30 dagar)</h2>
       <ul class="list-group">
         ${movies.map(m => `
-          <li class="list-group-item">
-            <strong>${m.title}</strong> – Betyg: ${m.avgRating.toFixed(2)}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>${m.title}</span>
+            <span class="badge bg-warning text-dark">${m.avgRating.toFixed(1)} ★</span>
           </li>
         `).join('')}
       </ul>
     `;
-  } catch (err) {
-    container.innerHTML = '<p>Kunde inte ladda populära filmer.</p>';
+  } catch {
+    container.innerHTML = '<p class="text-muted">Kunde inte ladda populära filmer.</p>';
   }
 });

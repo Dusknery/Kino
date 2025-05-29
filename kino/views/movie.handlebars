@@ -1,9 +1,77 @@
-<h1 class="text-center">{{title}}</h1>
-<div class="movie-details text-center">
-  <img src="{{image}}" alt="{{title}}" class="movie-poster mx-auto d-block">
-  <p><strong>Beskrivning:</strong> {{description}}</p>
-  <p><strong>Genre:</strong> {{genre}}</p>
-  <p><strong>Utgivningsdatum:</strong> {{releaseDate}}</p>
-  <p><strong>Regissör:</strong> {{director}}</p>
+<div class="container py-4">
+  <div class="row">
+    <!-- Filminfo -->
+    <div class="col-md-8">
+      <h1>{{title}}</h1>
+      <div class="mb-2">
+        {{#each tags}}
+          <span class="badge bg-secondary me-1">{{this}}</span>
+        {{/each}}
+      </div>
+      <p>{{description}}</p>
+
+      <ul class="list-unstyled">
+        <li><strong>Genre:</strong> {{genre}}</li>
+        <li><strong>Utgivningsdatum:</strong> {{releaseDate}}</li>
+        <li><strong>Regissör:</strong> {{director}}</li>
+        {{#if ageLimit}}
+          <li><strong>Åldersgräns:</strong> {{ageLimit}}</li>
+        {{/if}}
+      </ul>
+
+      {{#if bookingLink}}
+        <a href="{{bookingLink}}" class="btn btn-danger btn-lg mt-3">BOKA NU</a>
+      {{/if}}
+
+      <!-- Visningar direkt under filminfo -->
+      <div class="mt-5">
+        <h3>Visningar</h3>
+        <div id="movie-screenings"></div>
+      </div>
+
+      <!-- Recensioner -->
+      <div class="mt-5">
+        <h3>Recensioner</h3>
+        <div id="movie-reviews"></div>
+      </div>
+
+      <div class="mt-4">
+        <button id="show-review-form" class="btn btn-outline-danger mb-3">Lämna en recension</button>
+        <form id="review-form" class="mb-3 d-none">
+          <div class="mb-2">
+            <label for="review-author" class="form-label">Namn</label>
+            <input type="text" class="form-control" id="review-author" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Betyg</label>
+            <div id="star-rating" class="mb-2">
+              <i class="bi bi-star-fill text-secondary" data-value="1" style="cursor:pointer;"></i>
+              <i class="bi bi-star-fill text-secondary" data-value="2" style="cursor:pointer;"></i>
+              <i class="bi bi-star-fill text-secondary" data-value="3" style="cursor:pointer;"></i>
+              <i class="bi bi-star-fill text-secondary" data-value="4" style="cursor:pointer;"></i>
+              <i class="bi bi-star-fill text-secondary" data-value="5" style="cursor:pointer;"></i>
+            </div>
+            <input type="hidden" id="review-rating" required>
+          </div>
+          <div class="mb-2">
+            <label for="review-comment" class="form-label">Kommentar</label>
+            <textarea class="form-control" id="review-comment" rows="2" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-danger">Skicka</button>
+          <div id="review-message" class="mt-2"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Trailer & Poster -->
+    <div class="col-md-4 text-center">
+      {{#if trailerLink}}
+        <a href="{{trailerLink}}" class="btn btn-outline-light mb-3" target="_blank">Se trailer</a>
+      {{/if}}
+      <img src="{{image}}" alt="Filmaffisch för {{title}}" class="img-fluid rounded shadow">
+    </div>
+  </div>
 </div>
-<a href="/" class="btn btn-primary d-block mx-auto mt-3" style="max-width:200px;">Tillbaka till start</a>
+<a href="/" class="btn btn-danger d-block mx-auto mt-3" style="max-width:200px;">Tillbaka till start</a>
+<script src="/js/movie-screenings.js"></script>
+<script src="/js/movie-reviews.js"></script>

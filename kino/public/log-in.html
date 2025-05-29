@@ -59,15 +59,18 @@
           <h2>Logga in</h2>
           <p class="lead">Du har ett konto. Skriv in ditt lösenord för att logga in.</p>
       
-          <form id="loginForm">
+          <div id="loginError" class="alert alert-danger d-none" role="alert">
+  Fel användarnamn eller lösenord.
+</div>
+<form id="loginForm" action="/login" method="POST">
           <div class="mb-3">
             <label for="username" class="form-label">Användarnamn</label>
-            <input type="text" id="username" class="form-control" required />
+            <input type="text" name="username" id="username" class="form-control" required />
           </div>
 
           <div class="mb-3">
             <label for="password" class="form-label">Lösenord</label>
-            <input type="password" id="password" class="form-control" required />
+            <input type="password" name="password" id="password" class="form-control" required />
           </div>
 
           <div class="mb-3">
@@ -89,6 +92,6 @@
     </div>
   </main>
 
-  <script src="main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

@@ -84,7 +84,7 @@ if (signupForm) {
     localStorage.setItem("loggedInUser", username);
 
     alert("Konto skapat!");
-    window.location.href = "start.html";
+    window.location.href = "/";
   });
 }
 
@@ -152,3 +152,12 @@ if (filmListElement) {
       console.error("Fel vid hämtning av filmer:", error);
     });
 }
+
+// --- Visa inloggningsfel --- //
+document.addEventListener('DOMContentLoaded', function() {
+  const params = new URLSearchParams(window.location.search);
+  const loginError = document.getElementById('loginError');
+  if (loginError && params.get('error') === '1') {
+    loginError.classList.remove('d-none');
+  }
+});

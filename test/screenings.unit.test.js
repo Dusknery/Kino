@@ -24,7 +24,7 @@ app.get('/api/screenings/upcoming', async (req, res) => {
       .sort((a, b) => new Date(a.attributes.time) - new Date(b.attributes.time))
       .slice(0, 10);
 
-    res.json(filtered); // Alltid en array, även om den är tom!
+    res.json(filtered);
   } catch (err) {
     res.status(500).json({ error: 'Kunde inte hämta visningar' });
   }
@@ -37,8 +37,8 @@ describe('GET /api/screenings/upcoming', () => {
       screenings.push({
         attributes: {
           time: i < 8
-            ? `2024-06-0${i+1}T18:00:00Z` 
-            : `2024-06-2${i}T18:00:00Z`, 
+            ? `2024-06-0${i+1}T18:00:00Z`
+            : `2024-06-2${i}T18:00:00Z`,
           movie: { data: { attributes: { title: `Film ${i+1}` } } }
         }
       });
@@ -47,7 +47,7 @@ describe('GET /api/screenings/upcoming', () => {
 
     const res = await request(app).get('/api/screenings/upcoming');
     expect(res.status).toBe(200);
-    expect(res.body.length).toBe(5); // istället för 8
+    expect(res.body.length).toBe(5);
     expect(res.body[0].attributes.movie.data.attributes.title).toBe('Film 1');
   });
 
