@@ -1,71 +1,77 @@
 # Kino
 
-Kino är en biografsida byggd med Next.js.  
-Funktionaliteten omfattar:
-- Lista över filmer och detaljerad information om varje film
-- Visning av kommande filmvisningar
-- Möjlighet att skapa konto och logga in
-- Möjlighet att lämna recensioner på filmer (betyg och kommentar)
+Kino is a cinema website built with Next.js.  
+Functionality includes:
+- List of movies and detailed information about each movie
+- Display of upcoming screenings
+- Ability to create an account and log in
+- Ability to leave reviews on movies (rating and comment)
 
-Projektet använder ett headless CMS som datakälla för filmer och visningar, samt ett eget REST API för recensioner.
+The project uses a headless CMS as the data source for movies and screenings, along with a custom REST API for reviews.
 
-All film-, recensions- och visningsdata hämtas via API från CMS:  
+All movie, review, and screening data is fetched via API from the CMS:  
 https://plankton-app-xhkom.ondigitalocean.app/documentation/v1.0.0
 
 ---
 
-## Kom igång
+## Getting Started
 
-1. Klona repot:
-   ```
-   git clone https://github.com/Dusknery/Kino.git
-   cd Kino
-   ```
-2. Installera alla paket:
-   ```
-   npm install
-   ```
-3. Starta servern:
-   ```
-   npm start
-   ```
-4. Besök [http://localhost:3000](http://localhost:3000)
+1. Clone the repo:
+git clone https://github.com/Dusknery/Kino.git
+cd Kino
+
+css
+Copy
+Edit
+2. Install all packages:
+npm install
+
+markdown
+Copy
+Edit
+3. Start the server:
+npm start
+
+yaml
+Copy
+Edit
+4. Visit [http://localhost:3000](http://localhost:3000)
 
 ---
 
 ## API
 
-- **GET /api/reviews?movieId=ID** – Hämta recensioner för en film 
-- **POST /api/reviews** – Skapa en recension
-- **GET /api/popular-movies** – Hämta de 5 mest populära filmerna (snittbetyg senaste 30 dagar)
-- **GET /api/screenings/upcoming** – Hämta max 10 kommande visningar för de närmaste 5 dagarna
+- **GET /api/reviews?movieId=ID** – Fetch reviews for a movie  
+- **POST /api/reviews** – Submit a review  
+- **GET /api/popular-movies** – Fetch the 5 most popular movies (average rating in the last 30 days)  
+- **GET /api/screenings/upcoming** – Fetch up to 10 upcoming screenings within the next 5 days
 
 ---
 
-## Organisation och arbetsprocess
+## Organization and Workflow
 
-Projektet har planerats genom att identifiera nödvändig funktionalitet och dela upp arbetet i mindre delar:  
-- Sidstruktur och navigation  
-- Filmlista och filmsida  
-- Inloggning och registrering  
-- Recensioner och visningar
+The project was planned by identifying necessary functionality and dividing the work into smaller parts:  
+- Page structure and navigation  
+- Movie list and movie detail page  
+- Login and registration  
+- Reviews and screenings
 
-Versionshantering har skett med GitHub. Pull requests har använts för nya funktioner och code review har genomförts innan merge. Issues har använts för planering och fördelning av arbetsuppgifter.
-
----
-
-## Testningsstrategi
-
-Funktionaliteten har testats manuellt i webbläsaren.  
-Samtliga flöden har verifierats: inloggning, registrering, lämna recension, samt navigering mellan filmer och visningar.  
-Felmeddelanden visas vid ogiltig inloggning eller felaktig input.
+Version control was managed with GitHub. Pull requests were used for new features, and code review was conducted before merging. Issues were used for planning and task distribution.
 
 ---
 
-## Övrigt
+## Testing Strategy
 
-Recensioner sparas i minnet på servern (för demo/school purpose).  
-Vid produktion bör detta ersättas med en databas, exempelvis MongoDB.
+Functionality was manually tested in the browser.  
+All flows were verified: login, registration, submitting reviews, and navigating between movies and screenings.  
+Error messages are shown for invalid logins or incorrect input.
 
-All film-, recensions- och visningsdata hämtas via API från CMS:  
+---
+
+## Other
+
+Reviews are stored in memory on the server (for demo/school purposes).  
+In production, this should be replaced with a database such as MongoDB.
+
+All movie, review, and screening data is fetched via API from the CMS:  
 https://plankton-app-xhkom.ondigitalocean.app/documentation/v1.0.0
