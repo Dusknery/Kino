@@ -2,9 +2,17 @@ const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const fetch = require('node-fetch');
+const User = require('./models/user');
+const mongoose = require('mongoose');
 
 const app = express();
-const PORT = 5080;
+const PORT = 3000;
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/kino', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 // Middleware
 app.use(express.static(path.join(__dirname, 'public')));
@@ -166,14 +174,43 @@ app.post('/api/reviews', async (req, res) => {
   }
 });
 
+// Registrera användare
+app.post('/api/register', async (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) return res.status(400).json({ error: 'Alla fält krävs' });
+  try {
+    const user = new User({ username, password });
+    await user.save();
+    res.status(201).json({ message: 'Användare skapad' });
+  } catch (err) {
+    res.status(400).json({ error: 'Användarnamnet är upptaget' });
+  }
+});
+
+// Logga in användare
+app.post('/api/login', async (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) return res.status(400).json({ error: 'Alla fält krävs' });
+  try {
+    const user = await User.findOne({ username });
+    if (!user) return res.status(401).json({ error: 'Fel användarnamn eller lösenord' });
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) return res.status(401).json({ error: 'Fel användarnamn eller lösenord' });
+    res.json({ message: 'Inloggning lyckades' });
+  } catch (err) {
+    res.status(500).json({ error: 'Fel vid inloggning' });
+  }
+});
+
 app.get('/api/screenings', async (req, res) => {
   const { movieId } = req.query;
   if (!movieId) return res.status(400).json({ error: 'movieId krävs' });
+}); 
 
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Servern körs på http://localhost:${PORT}`);
+  });
+}
 
-
-const server = app.listen(PORT, () => {
-  console.log(`Servern körs på http://localhost:${PORT}`);
-});
-module.exports = server;
-})
+module.exports = app;

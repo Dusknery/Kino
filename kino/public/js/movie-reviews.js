@@ -56,13 +56,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
   loadReviews();
 
-  // --- Visa/dölj formulär ---
+  // --- Kräv inloggning för att visa formuläret ---
+  const reviewForm = document.getElementById('review-form');
   const showBtn = document.getElementById('show-review-form');
-  const form = document.getElementById('review-form');
-  if (showBtn && form) {
-    showBtn.addEventListener('click', function() {
-      form.classList.remove('d-none');
-      showBtn.classList.add('d-none');
+  const reviewMessage = document.getElementById('review-message');
+  const loginPopup = document.getElementById('review-login-popup');
+  const username = localStorage.getItem('username');
+
+
+
+  // --- Visa/dölj formulär ---
+  if (showBtn && reviewForm) {
+    showBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (!username) {
+        loginPopup.textContent = 'Du måste vara inloggad för att lämna en recension.';
+        loginPopup.classList.remove('d-none');
+        setTimeout(() => {
+          loginPopup.classList.add('d-none');
+        }, 2000);
+      } else {
+        reviewForm.classList.toggle('d-none');
+        loginPopup.classList.add('d-none');
+      }
     });
   }
 
@@ -128,6 +144,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } catch {
         document.getElementById('review-message').textContent = 'Kunde inte spara recension.';
+      }
+    });
+  }
+
+  function containsCode(str) {
+    // Tillåt endast bokstäver, siffror, mellanslag, punkt, bindestreck och understreck
+    return /[<>\/\\{}[\];:"'=|`~]/.test(str);
+  }
+
+  // --- Validera recensionformulär ---
+  if (reviewForm) {
+    reviewForm.addEventListener('submit', function (e) {
+      const author = document.getElementById('review-author').value;
+      const comment = document.getElementById('review-comment').value;
+      const message = document.getElementById('review-message');
+
+      if (containsCode(author) || containsCode(comment)) {
+        e.preventDefault();
+        message.textContent = 'Du får inte använda otillåtna tecken i namn eller kommentar.';
+        message.className = 'text-danger mt-2';
+        return false;
       }
     });
   }

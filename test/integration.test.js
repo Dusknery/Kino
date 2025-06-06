@@ -1,5 +1,5 @@
 const request = require('supertest');
-const server = require('../kino/server');
+const app = require('../kino/server');
 const fetch = require('node-fetch');
 
 describe('Filmsidor', () => {
@@ -14,13 +14,10 @@ describe('Filmsidor', () => {
 
   it('ska visa rätt titel för varje film', async () => {
     for (const movie of movies) {
-      const res = await request(server).get(`/movies/${movie.id}`);
+      const res = await request(app).get(`/movies/${movie.id}`);
       expect(res.status).toBe(200);
       expect(res.text).toMatch(new RegExp(movie.attributes.title, 'i'));
     }
   });
 
-  afterAll(done => {
-    server.close(done);
   });
-});

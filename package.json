@@ -24,9 +24,11 @@
     "supertest": "^7.1.1"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "express": "^5.1.0",
     "express-handlebars": "^8.0.3",
     "express-session": "^1.18.1",
+    "mongoose": "^8.15.1",
     "node-fetch": "^2.7.0"
   }
 }

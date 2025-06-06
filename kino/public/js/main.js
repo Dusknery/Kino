@@ -1,126 +1,3 @@
-// --- SIGN UP --- //
-
-const signupForm = document.getElementById("signupForm");
-const signupButton = document.getElementById("signupButton");
-
-const usernameInput = document.getElementById("username");
-const fullnameInput = document.getElementById("fullname");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const termsCheckbox = document.getElementById("termsCheckbox");
-
-const emailFeedback = document.getElementById("emailFeedback");
-const strengthText = document.getElementById("strengthText");
-
-// --- Lösenordsstyrka --- //
-if (passwordInput && strengthText) {
-  passwordInput.addEventListener("input", () => {
-    const val = passwordInput.value;
-
-    if (val.length < 6) {
-      strengthText.textContent = "Svagt";
-      strengthText.style.color = "red";
-    } else if (val.length < 10) {
-      strengthText.textContent = "Okej";
-      strengthText.style.color = "orange";
-    } else {
-      strengthText.textContent = "Starkt";
-      strengthText.style.color = "lightgreen";
-    }
-
-    checkSignupFormValidity();
-  });
-}
-
-// --- Aktivera/Inaktivera knapp --- //
-function checkSignupFormValidity() {
-  if (!signupButton) return;
-
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
-  const username = usernameInput.value.trim();
-  const fullname = fullnameInput.value.trim();
-  const termsChecked = termsCheckbox.checked;
-
-  const validEmail = /^[^\s@]+@[^\s@]+\.(com|se|net|org|edu|gov|info|biz|io)$/i.test(email);
-
-  const allValid = email && validEmail && password && username && fullname && termsChecked;
-  signupButton.disabled = !allValid;
-}
-
-// --- Lyssna på fält --- //
-if (signupForm) {
-  [emailInput, passwordInput, usernameInput, fullnameInput, termsCheckbox].forEach(input => {
-    input.addEventListener("input", checkSignupFormValidity);
-    input.addEventListener("change", checkSignupFormValidity);
-  });
-
-  // ---Submit--- //
-  signupForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const username = usernameInput.value;
-    const fullname = fullnameInput.value;
-    const email = emailInput.value;
-    const password = passwordInput.value;
-
-    const validEmail = /^[^\s@]+@[^\s@]+\.(com|se|net|org|edu|gov|info|biz|io)$/i.test(email);
-
-    if (!validEmail) {
-      emailFeedback.textContent = "Detta är inte en giltig e-postadress.";
-      emailFeedback.classList.remove("d-none");
-      return;
-    } else {
-      emailFeedback.classList.add("d-none");
-    }
-
-    if (!termsCheckbox.checked) {
-      alert("Du måste godkänna villkoren för att gå vidare.");
-      return;
-    }
-
-    const user = { fullname, email, password };
-    localStorage.setItem(username, JSON.stringify(user));
-    localStorage.setItem("loggedInUser", username);
-
-    alert("Konto skapat!");
-    window.location.href = "/";
-  });
-}
-
-// --- LOG IN --- //
-
-const loginForm = document.getElementById("loginForm");
-
-if (loginForm) {
-  loginForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const savedUser = JSON.parse(localStorage.getItem(username));
-
-    if (savedUser && savedUser.password === password) {
-      localStorage.setItem("loggedInUser", username);
-      alert("Inloggning lyckades!");
-      window.location.href = "start.html";
-    } else {
-      alert("Fel användarnamn eller lösenord.");
-    }
-  });
-}
-
-// ---- Visa användarnamn i header om inloggad----//
-const userStatus = document.getElementById("userStatus");
-const loggedInUser = localStorage.getItem("loggedInUser");
-
-if (userStatus && loggedInUser) {
-  userStatus.innerHTML = `
-    <a href="profil.html" class="btn btn-outline-light rounded-pill">
-      <i class="bi bi-person me-2"></i> ${loggedInUser}
-    </a>
-  `;
-}
-
 // --- Hämta filmer och visa dem på startsidan --- //
 const filmListElement = document.getElementById("filmList");
 
@@ -153,11 +30,76 @@ if (filmListElement) {
     });
 }
 
-// --- Visa inloggningsfel --- //
-document.addEventListener('DOMContentLoaded', function() {
-  const params = new URLSearchParams(window.location.search);
-  const loginError = document.getElementById('loginError');
-  if (loginError && params.get('error') === '1') {
-    loginError.classList.remove('d-none');
+// --- Hantera registreringsformulär --- //
+document.addEventListener('DOMContentLoaded', () => {
+  const signupForm = document.getElementById('signupForm');
+  const signupButton = document.getElementById('signupButton');
+  const termsCheckbox = document.getElementById('termsCheckbox');
+  const username = document.getElementById('username');
+  const fullname = document.getElementById('fullname');
+  const email = document.getElementById('email');
+  const password = document.getElementById('password');
+
+  function containsCode(str) {
+    // Tillåt endast bokstäver, siffror, mellanslag, punkt, bindestreck och understreck
+    return /[<>\/\\{}[\];:"'=|`~]/.test(str);
   }
+
+  function checkForm() {
+    if (
+      username.value.trim() &&
+      fullname.value.trim() &&
+      email.value.trim() &&
+      password.value.trim() &&
+      termsCheckbox.checked &&
+      !containsCode(username.value) &&
+      !containsCode(fullname.value) &&
+      !containsCode(email.value) &&
+      !containsCode(password.value)
+    ) {
+      signupButton.disabled = false;
+    } else {
+      signupButton.disabled = true;
+    }
+  }
+
+  [username, fullname, email, password, termsCheckbox].forEach(el => {
+    el.addEventListener('input', checkForm);
+    el.addEventListener('change', checkForm);
+  });
+
+  signupForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Hämta värden
+    const usernameVal = username.value.trim();
+    const passwordVal = password.value.trim();
+
+    // Skicka till backend
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: usernameVal, password: passwordVal })
+    });
+
+    const data = await res.json();
+    const successDiv = document.getElementById('signupSuccess');
+
+    if (res.ok) {
+      successDiv.textContent = 'Ditt konto har skapats! Du skickas nu till inloggningen...';
+      successDiv.classList.remove('d-none');
+      signupForm.reset();
+      signupButton.disabled = true;
+      setTimeout(() => {
+        window.location.href = '/log-in.html';
+      }, 2000); // Vänta 2 sekunder innan redirect
+    } else {
+      successDiv.textContent = data.error || 'Något gick fel vid registrering.';
+      successDiv.classList.remove('d-none');
+      successDiv.classList.replace('alert-success', 'alert-danger');
+    }
+  });
 });
+
+
+

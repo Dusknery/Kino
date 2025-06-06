@@ -56,7 +56,7 @@
         <div class="signup-form-inner w-100" style="max-width: 500px;">
           <h2 class="mb-4">Bli medlem</h2>
 
-          <form id="signupForm" action="/register" method="POST">
+          <form id="signupForm" autocomplete="off">
             <div class="mb-3">
               <label for="username" class="form-label">Användarnamn</label>
               <input type="text" id="username" class="form-control" name="username" required />
@@ -94,6 +94,7 @@
 
             <button type="submit" id="signupButton" class="btn btn-register w-100" disabled>Bli Medlem</button>
         </form>
+        <div id="signupSuccess" class="alert alert-success d-none" role="alert"></div>
         </div>
       </section>
     </div>
